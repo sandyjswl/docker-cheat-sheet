@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  redis:
+    image: "bitnami/redis"
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    container_name: redis_vote_container
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      REDIS_HOST: redis_vote_container
+      REDIS_PORT: 6379
+    container_name: vote_container
